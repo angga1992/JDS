@@ -1,0 +1,22 @@
+{
+  "name": "JDS",
+  "version": "1.0.0",
+  "description": "Test Frontend JDS",
+  "author": "Angga Mulya Sasmita",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
+    "ant-design-vue": "^1.4.10",
+    "nuxt": "^2.0.0",
+    "vuejs-datepicker": "^1.6.2"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^1.0.0"
+  }
+}
