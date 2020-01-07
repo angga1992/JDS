@@ -1,73 +1,108 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        JDS
-      </h1>
-      <h2 class="subtitle">
-        Test Frontend JDS
-      </h2>
-      <div class="links">
-        <nuxt-link to="registration">
-          Soal test JDS
-        </nuxt-link>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+  <div class="container bg-gray-600">
+    <div class="flex flex-col h-full min-h-screen w-full px-4">
+        <div id="app" class="flex justify-center items-center h-40">
+            <span class="text-xl font-bold  text-white">{{ title }}</span>
+        </div>
+      <div class="mb-4 mt-15 text-left items-start justify-start">
+        <label class="block text-gray-200 text-sm font-bold mb-2"
+               for="name">
+          Nama Lengkap
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+               id="name"
+               type="text"
+               v-model="payload['name']"
+               placeholder="Nama Lengkap">
       </div>
+
+      <div class="mb-4 text-left items-start justify-start">
+        <label class="block text-gray-200 text-sm font-bold mb-2"
+               for="date">
+          Tanggal Lahir
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+               id="date"
+               type="date"
+               v-model="payload['date']"
+               placeholder="Tanggal Lahir">
+      </div>
+
+      <div class="mb-4 text-left items-start justify-start">
+        <label class="block text-gray-200 text-sm font-bold mb-2"
+               for="username">
+          Jenis Kelamin
+        </label>
+        <input type="radio" v-model="payload['gender']" class="form-radio" name="accountType" value="pria">
+        <span class="ml-2 mr-4 text-white">Pria</span>
+
+        <input type="radio" v-model="payload['gender']" class="form-radio " name="accountType" value="wanita">
+        <span class="ml-2 text-white">Wanita</span>
+
+      </div>
+
+      <div class="mb-4 text-left items-start justify-start">
+        <label class="block text-gray-200 text-sm font-bold mb-2"
+               for="name">
+          Alamat
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+               id="address"
+               type="text"
+               v-model="payload['address']"
+               placeholder="Alamat">
+      </div>
+
+      <div class="mb-20 text-left items-start justify-start">
+        <label class="block text-gray-200 text-sm font-bold mb-2"
+               for="name">
+          Daftar Riwayat Pekerjaan
+        </label>
+        <div v-for="(i, index) in count" :key="index">
+            <input class="shadow appearance-none border rounded w-full my-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+               :id="`name${i+'-'+i}`"
+               type="text"
+               :placeholder="`Riwayat Pekerjaan ${i}`">
+        </div>
+        <div class="flex text-center justify-center mt-2">
+            <button v-on:click.prevent="increment" class="bg-yellow-500 rounded-lg py-1 px-3 text-white focus:outline-none cursor-pointer">
+                Tambah Riwayat Pekerjaan
+            </button>
+        </div>
+      </div>
+
+      <div class="bottom-0 sticky">
+          <button 
+            :class="[payload['name'] && payload['date'] && payload['gender'] && payload['address'] ? 'bg-green-600' : 'bg-gray-500']"
+            class="cursor-pointer flex w-full rounded text-white py-2 px-4 text-center item-center justify-center focus:outline-none">
+              <span>
+                  Simpan
+              </span>
+          </button>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
 export default {
-  components: {
-    Logo
-  }
+    data() {
+        return {
+            title: 'Formulir Pendaftaran Online',
+            payload: {
+                name: '',
+                date: '',
+                gender: '',
+                address: ''
+            },
+            count: 2
+        }
+    },
+    methods: {
+        increment () {
+            this.count++;
+        },
+    }
 }
 </script>
-
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-  @apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
